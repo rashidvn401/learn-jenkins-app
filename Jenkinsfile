@@ -20,7 +20,6 @@ pipeline {
                 '''
             }
         }
-
         stage('Test') {
             agent {
                 docker {
