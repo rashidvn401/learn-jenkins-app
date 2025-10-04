@@ -93,6 +93,14 @@ pipeline {
             }
         }
 
+         stage('Approval') {
+            steps {
+                timeout(time: 15, unit: 'MINUTES') {
+                input message: 'Ready to deploy to production', ok: 'Yes, i am sure I want to deploy'
+                }
+            }
+        }
+
         stage('Deploy Prod') {
             agent {
                 docker {
@@ -108,14 +116,6 @@ pipeline {
                     node_modules/.bin/netlify status
                     node_modules/.bin/netlify deploy --dir=build --prod
                 '''
-            }
-        }
-
-         stage('Approval') {
-            steps {
-                timeout(time: 15, unit: 'MINUTES') {
-                input message: 'Ready to deploy to production', ok: 'Yes, i am sure I want to deploy'
-                }
             }
         }
 
