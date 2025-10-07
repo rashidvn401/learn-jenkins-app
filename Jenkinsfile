@@ -3,6 +3,7 @@ pipeline {
 
     environment {
         REACT_APP_VERSION = "1.2.$BUILD_ID"
+        AWS_DEFAULT_REGION = 'eu-north-1'
     }
 
     stages {
