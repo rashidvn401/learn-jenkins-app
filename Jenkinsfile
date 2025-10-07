@@ -45,6 +45,7 @@ pipeline {
                     LATEST_TD_REVISION=$(aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json | jq '.taskDefinition.revision')
                     echo $LATEST_TD_REVISION
                     aws ecs update-service --cluster determined-wolf-LearnJenkins-pipeline-demo --service determined-wolf-LearnJenkins-pipeline-demo-service-Prod --task-definition determined-wolf-LearnJenkins-pipeline-demo:$LATEST_TD_REVISION
+                    aws ecs wait services-stable --cluster determined-wolf-LearnJenkins-pipeline-demo --services determined-wolf-LearnJenkins-pipeline-demo-service-Prod
                 '''
                 }
             }
