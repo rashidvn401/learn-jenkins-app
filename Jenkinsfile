@@ -42,6 +42,7 @@ pipeline {
                 sh '''
                     aws --version
                     aws ecs register-task-definition --cli-input-json file://aws/task-definition-prod.json
+                    aws ecs update-service --cluster determined-wolf-LearnJenkins-pipeline-demo --service determined-wolf-LearnJenkins-pipeline-demo-service-Prod --task-definition determined-wolf-LearnJenkins-pipeline-demo:2
                 '''
                 }
             }
