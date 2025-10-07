@@ -5,6 +5,7 @@ pipeline {
         REACT_APP_VERSION = "1.0.$BUILD_ID"
         APP_NAME = 'myjenkinsapp'
         AWS_DEFAULT_REGION = 'eu-north-1'
+        AWS_DOCKER_REGISTRY = '386606043713.dkr.ecr.eu-north-1.amazonaws.com'
         AWS_ECS_CLUSTER = 'determined-wolf-LearnJenkins-pipeline-demo'
         AWS_ECS_SERVICE_PROD = 'determined-wolf-LearnJenkins-pipeline-demo-service-Prod'
         AWS_ECS_TD_PROD = 'determined-wolf-LearnJenkins-pipeline-demo'
@@ -42,7 +43,9 @@ pipeline {
 
             steps {
                 sh '''
-                    docker build -t $APP_NAME:$REACT_APP_VERSION .
+                    docker build -t $AWS_DOCKER_REGISTRY/$APP_NAME:$REACT_APP_VERSION .
+                    aws ecr get-login-password | docker login --username AWS --password-stdin $AWS_DOCKER_REGISTRY
+                    docker puch $AWS_DOCKER_REGISTRY/$APP_NAME:$REACT_APP_VERSION
                 '''
             }
         }        
