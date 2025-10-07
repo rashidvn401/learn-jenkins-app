@@ -41,7 +41,7 @@ pipeline {
 
             steps {
                 sh '''
-                    amazon-linux-extras install docker
+                    apk add --no-cache docker-cli
                     docker build -t myjenkinsapp .
                 '''
             }
