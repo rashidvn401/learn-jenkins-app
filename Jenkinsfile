@@ -10,7 +10,7 @@ pipeline {
     }
 
     stages {
-/*
+
         stage('Build') {
             agent {
                 docker {
@@ -30,7 +30,13 @@ pipeline {
                 '''
             }
         }
-*/
+
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build my-jenkinsapp .'
+            }
+        }
+
         stage ('Deploy to AWS') {
             agent {
                 docker {
