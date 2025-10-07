@@ -41,7 +41,7 @@ pipeline {
 
             steps {
                 sh '''
-                    apk add --no-cache docker-cli
+                    yum install docker -y
                     docker build -t myjenkinsapp .
                 '''
             }
