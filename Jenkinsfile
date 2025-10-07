@@ -20,7 +20,6 @@ pipeline {
             }
             steps {
                 sh '''
-                    echo "Small changes"
                     ls -la
                     node --version
                     npm --version
@@ -33,7 +32,7 @@ pipeline {
 
         stage('Build Docker Image') {
             steps {
-                sh 'docker build my-jenkinsapp .'
+                sh 'docker build -t my-jenkinsapp .'
             }
         }
 
